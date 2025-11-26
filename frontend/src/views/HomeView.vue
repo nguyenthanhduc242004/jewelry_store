@@ -25,7 +25,10 @@ const input = ref();
     <div>
       <el-button :icon="User" circle />
       <el-button :icon="HeartIcon" circle />
-      <el-button :icon="Goods" circle />
+      <el-badge :value="12" style="margin-left: 10px">
+        <el-button :icon="Goods" circle />
+      </el-badge>
     </div>
   </header>
+  <el-divider style="margin: 0" />
 </template>
