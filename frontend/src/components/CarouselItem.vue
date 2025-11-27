@@ -29,7 +29,7 @@ const props = defineProps([
       </div>
     </div>
     <div
-      style="width: 50%; background-image: linear-gradient(0, #c21500, #ffc500)"
+      style="width: 50%; background-image: linear-gradient(0, #d1913c, #ffd194)"
     >
       <div class="carousel-right">
         <div
