@@ -4,6 +4,54 @@ import { ref } from "vue";
 import HeartIcon from "@/components/icon/HeartIcon.vue";
 import type { TabsPaneContext } from "element-plus";
 import { RouterLink } from "vue-router";
+import CarouselItem from "@/components/CarouselItem.vue";
+
+import necklace from "@/assets/carousel-imgs/necklace.jpg";
+import necklace1 from "@/assets/carousel-imgs/necklace-1.jpg";
+import ring from "@/assets/carousel-imgs/ring.jpg";
+import ring1 from "@/assets/carousel-imgs/ring-1.jpg";
+import earrings from "@/assets/carousel-imgs/earrings.jpg";
+import earrings1 from "@/assets/carousel-imgs/earrings-1.jpg";
+import bracelet from "@/assets/carousel-imgs/bracelet.jpg";
+import bracelet1 from "@/assets/carousel-imgs/bracelet-1.jpg";
+
+const carouselPropsList = [
+  {
+    leftImageUrl: necklace,
+    heading: "NECKLACES",
+    subheading: "GRACE REFINED",
+    rightImageUrl: necklace1,
+    message:
+      "Elevate every look with our exquisite necklaces. From pendants to chokers, these designs add sophistication to any style.",
+    btnText: "SHOP NECLACES",
+  },
+  {
+    leftImageUrl: ring,
+    heading: "RINGS",
+    subheading: "A CIRCLE OF PERFECTION",
+    rightImageUrl: ring1,
+    message: "Celebrate every milestone with a ring that tells your story.",
+    btnText: "SHOP RINGS",
+  },
+  {
+    leftImageUrl: earrings,
+    heading: "EARRINGS",
+    subheading: "ELEGANCE IN EVERY DETAIL",
+    rightImageUrl: earrings1,
+    message:
+      "From everyday essentials to show-stopping chandeliers, our earrings are designed to captivate and complement every moment.",
+    btnText: "SHOP EARRINGS",
+  },
+  {
+    leftImageUrl: bracelet,
+    heading: "BRACELETS",
+    subheading: "STYLE ON YOUR SLEEVE",
+    rightImageUrl: bracelet1,
+    message:
+      "Add the perfect finishing touch with our bracelets. From classic bangles to modern cuffs, each piece is a work of art.",
+    btnText: "SHOP BRACELETS",
+  },
+];
 
 const input = ref();
 const activeTab = ref();
@@ -61,53 +109,18 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 
   <!-- <el-divider style="margin: 4px 0" /> -->
 
-  <div
-    class="carousel"
-    style="display: flex; height: calc(100vh - 60px); margin-top: 60px"
-  >
-    <div style="width: 50%; position: relative">
-      <img
-        style="width: 100%; height: 100%; object-fit: cover"
-        src="@/assets/carousel-imgs/earrings.jpg"
+  <el-carousel height="calc(100vh - 60px)" style="margin-top: 60px">
+    <el-carousel-item v-for="item in carouselPropsList" :key="item.heading">
+      <CarouselItem
+        :left-image-url="item.leftImageUrl"
+        :heading="item.heading"
+        :subheading="item.subheading"
+        :right-image-url="item.rightImageUrl"
+        :message="item.message"
+        :btn-text="item.btnText"
       />
-      <div
-        style="
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        "
-      >
-        <h2 class="carousel-heading">EARRINGS</h2>
-        <h4 class="carousel-subheading">ELEGANCE IN EVERY DETAIL</h4>
-      </div>
-    </div>
-    <div
-      style="width: 50%; background-image: linear-gradient(0, #c21500, #ffc500)"
-    >
-      <div class="carousel-right">
-        <div
-          style="
-            position: relative;
-            width: 100%;
-            height: 60%;
-            margin-bottom: 15px;
-          "
-        >
-          <div class="carousel-image-border" />
-          <img
-            class="carousel-image"
-            src="@/assets/carousel-imgs/earrings-1.jpg"
-          />
-        </div>
-        <p class="carousel-paragraph">
-          Elevate every look with our exquisite necklaces. From pendants to
-          chokers, these designs add sophistication to any style.
-        </p>
-        <button class="carousel-btn">SHOP NECKLACES</button>
-      </div>
-    </div>
-  </div>
+    </el-carousel-item>
+  </el-carousel>
 
   <nav>
     <ul style="list-style: none; display: flex; justify-content: center">
@@ -139,105 +152,6 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </template>
 
 <style scoped>
-.carousel-right {
-  width: 40%;
-  height: 100%;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.carousel-heading {
-  font-family: "Josefin Sans";
-  font-size: 80px;
-  font-weight: 400;
-  color: rgb(255, 255, 255);
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0px;
-  line-height: 70px;
-  text-align: center;
-  white-space: normal;
-  padding: 0px 35px;
-  display: block;
-}
-
-.carousel-subheading {
-  font-family: "Josefin Sans";
-  font-size: 13px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 3.48958px;
-  line-height: 35px;
-  text-align: center;
-  white-space: normal;
-  display: block;
-}
-
-.carousel-image-border {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(calc(-50% - 8px), calc(-50% - 8px));
-
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(255, 255, 255, 0.65);
-  border-radius: 300px 300px 0px 0px;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.carousel-image {
-  border-radius: 300px 300px 0px 0px;
-  transform-origin: 50% 50%;
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.carousel-paragraph {
-  font-family: Inter;
-  font-size: 12px;
-  font-weight: 400;
-  color: rgb(255, 255, 255);
-  text-transform: none;
-  text-decoration: none;
-  letter-spacing: 0.744444px;
-  line-height: 19px;
-  text-align: center;
-  white-space: normal;
-  display: block;
-
-  margin-bottom: 40px;
-}
-
-.carousel-btn {
-  font-family: "Josefin Sans";
-  font-size: 12px;
-  font-weight: 500;
-  color: rgb(255, 255, 255);
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0.744444px;
-  line-height: 45px;
-  text-align: center;
-  white-space: normal;
-  padding: 0px 37px;
-  border-style: solid;
-  border-width: 1px 1px 0px;
-  border-color: rgba(255, 255, 255, 0.36);
-  border-radius: 50%;
-  display: block;
-  transform: translate3d(0px, 0px, 0px);
-  background: rgba(255, 255, 255, 0);
-}
-
 .nav-item {
   display: block;
   height: 40px;
