@@ -1,21 +1,29 @@
 <script setup lang="ts">
-import { Goods, Search, User } from "@element-plus/icons-vue";
-import { ref } from "vue";
-import HeartIcon from "@/components/icon/HeartIcon.vue";
-import type { TabsPaneContext } from "element-plus";
-import { RouterLink } from "vue-router";
 import CarouselItem from "@/components/CarouselItem.vue";
+// @ts-ignore: no type declaration for .vue modules
+import BrandItem from "@/components/BrandItem.vue";
+import HeartIcon from "@/components/icon/HeartIcon.vue";
+import { Goods, Search, User } from "@element-plus/icons-vue";
+import type { TabsPaneContext } from "element-plus";
+import { ref } from "vue";
 
-import necklace from "@/assets/carousel-imgs/necklace.jpg";
-import necklace1 from "@/assets/carousel-imgs/necklace-1.jpg";
-import ring from "@/assets/carousel-imgs/ring.jpg";
-import ring1 from "@/assets/carousel-imgs/ring-1.jpg";
-import earrings from "@/assets/carousel-imgs/earrings.jpg";
-import earrings1 from "@/assets/carousel-imgs/earrings-1.jpg";
-import bracelet from "@/assets/carousel-imgs/bracelet.jpg";
 import bracelet1 from "@/assets/carousel-imgs/bracelet-1.jpg";
+import bracelet from "@/assets/carousel-imgs/bracelet.jpg";
+import earrings1 from "@/assets/carousel-imgs/earrings-1.jpg";
+import earrings from "@/assets/carousel-imgs/earrings.jpg";
+import necklace1 from "@/assets/carousel-imgs/necklace-1.jpg";
+import necklace from "@/assets/carousel-imgs/necklace.jpg";
+import ring1 from "@/assets/carousel-imgs/ring-1.jpg";
+import ring from "@/assets/carousel-imgs/ring.jpg";
 
-const carouselPropsList = [
+import brand1 from "@/assets/brand_logos/brand1.jpg";
+import brand2 from "@/assets/brand_logos/brand2.jpg";
+import brand3 from "@/assets/brand_logos/brand3.jpg";
+import brand4 from "@/assets/brand_logos/brand4.jpg";
+import brand5 from "@/assets/brand_logos/brand5.jpg";
+import brand6 from "@/assets/brand_logos/brand6.jpg";
+
+const carouselItemPropsList = [
   {
     leftImageUrl: necklace,
     heading: "NECKLACES",
@@ -53,6 +61,39 @@ const carouselPropsList = [
   },
 ];
 
+const brandItemPropsList = [
+  {
+    brandImageUrl: brand1,
+    brandName: "SILVORA",
+    btnUrl: "",
+  },
+  {
+    brandImageUrl: brand2,
+    brandName: "LUMERA",
+    btnUrl: "",
+  },
+  {
+    brandImageUrl: brand3,
+    brandName: "NILA",
+    btnUrl: "",
+  },
+  {
+    brandImageUrl: brand4,
+    brandName: "MUSE",
+    btnUrl: "",
+  },
+  {
+    brandImageUrl: brand5,
+    brandName: "INGOUDE",
+    btnUrl: "",
+  },
+  {
+    brandImageUrl: brand6,
+    brandName: "VERRA",
+    btnUrl: "",
+  },
+];
+
 const input = ref();
 const activeTab = ref();
 
@@ -69,19 +110,12 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       left: 0;
       right: 0;
       width: 100%;
-      background: linear-gradient(to right, #82009f 0%, #5d34af 100%);
+      background-color: #333;
       padding: 0 32px;
       z-index: 1000;
     "
   >
-    <div
-      style="
-        display: flex;
-        align-items: center;
-        max-width: 1280px;
-        margin: 0 auto;
-      "
-    >
+    <div style="display: flex; align-items: center" class="main-container">
       <el-input
         v-model="input"
         placeholder="What are you looking for?"
@@ -107,22 +141,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </div>
   </header>
 
-  <!-- <el-divider style="margin: 4px 0" /> -->
-
-  <el-carousel height="calc(100vh - 60px)" style="margin-top: 60px">
-    <el-carousel-item v-for="item in carouselPropsList" :key="item.heading">
-      <CarouselItem
-        :left-image-url="item.leftImageUrl"
-        :heading="item.heading"
-        :subheading="item.subheading"
-        :right-image-url="item.rightImageUrl"
-        :message="item.message"
-        :btn-text="item.btnText"
-      />
-    </el-carousel-item>
-  </el-carousel>
-
-  <nav>
+  <!-- <nav style="margin-top: 60px; background-color: #333">
     <ul style="list-style: none; display: flex; justify-content: center">
       <li>
         <RouterLink class="nav-item" to="/brands">Brands</RouterLink>
@@ -148,7 +167,47 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
         </RouterLink>
       </li>
     </ul>
-  </nav>
+  </nav> -->
+
+  <el-carousel height="calc(100vh - 60px)" style="margin-top: 60px">
+    <el-carousel-item v-for="item in carouselItemPropsList" :key="item.heading">
+      <CarouselItem
+        :left-image-url="item.leftImageUrl"
+        :heading="item.heading"
+        :subheading="item.subheading"
+        :right-image-url="item.rightImageUrl"
+        :message="item.message"
+        :btn-text="item.btnText"
+      />
+    </el-carousel-item>
+  </el-carousel>
+
+  <h1
+    style="
+      text-align: center;
+      margin-top: 40px;
+      font-size: 40px;
+      letter-spacing: 4px;
+    "
+  >
+    BRANDS
+  </h1>
+
+  <div class="main-container" style="padding: 5px 0">
+    <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
+      <el-col
+        :span="8"
+        v-for="item in brandItemPropsList"
+        :key="item.brandName"
+      >
+        <BrandItem
+          :brand-image-url="item.brandImageUrl"
+          :brand-name="item.brandName"
+          :btn-url="item.btnUrl"
+        />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <style scoped>
@@ -157,18 +216,18 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   height: 40px;
   line-height: 40px;
   text-decoration: none;
-  color: #555;
+  color: #ddd;
   padding: 0 20px;
   font-size: 18px;
 
   &:hover {
-    animation: navItemColorChange 0.2s forwards;
+    animation: navItemColorChange 0.6s forwards;
   }
 }
 
 @keyframes navItemColorChange {
   from {
-    color: #555;
+    color: #ddd;
   }
   to {
     color: #ffc108;

@@ -1,6 +1,12 @@
-@import './base.css';
+@import "./base.css";
 
 #app {
-  margin: 0 auto;
   font-weight: normal;
+  font-family: "Josefin Sans";
+}
+
+.main-container {
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
 }
