@@ -11,6 +11,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BenefitItem: typeof import('./src/components/BenefitItem.vue')['default']
     BrandItem: typeof import('./src/components/BrandItem.vue')['default']
     CarouselItem: typeof import('./src/components/CarouselItem.vue')['default']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -25,9 +26,12 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    FastDeliveryIcon: typeof import('./src/components/icon/FastDeliveryIcon.vue')['default']
+    GemstoneIcon: typeof import('./src/components/icon/GemstoneIcon.vue')['default']
     Heading: typeof import('./src/components/Heading.vue')['default']
     HeartIcon: typeof import('./src/components/icon/HeartIcon.vue')['default']
     ProductItem: typeof import('./src/components/ProductItem.vue')['default']
+    ProtectedIcon: typeof import('./src/components/icon/ProtectedIcon.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

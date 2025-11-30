@@ -9,6 +9,10 @@ import { ref } from "vue";
 
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/vue-splide/css";
+import FastDeliveryIcon from "@/components/icon/FastDeliveryIcon.vue";
+import GemstoneIcon from "@/components/icon/GemstoneIcon.vue";
+import ProtectedIcon from "@/components/icon/ProtectedIcon.vue";
+import BenefitItem from "@/components/BenefitItem.vue";
 
 const carouselItemPropsList = [
   {
@@ -221,7 +225,6 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   </el-carousel>
 
   <h1 class="heading">BRANDS</h1>
-
   <div class="main-container" style="padding: 5px 0">
     <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
       <el-col
@@ -239,24 +242,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   </div>
 
   <h1 class="heading">NEW PRODUCTS</h1>
-
-  <!-- <div class="main-container" style="padding: 5px 0">
-    <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
-      <el-col
-        :span="6"
-        v-for="item in brandItemPropsList"
-        :key="item.brandName"
-      >
-        <BrandItem
-          :brand-image-url="item.brandImageUrl"
-          :brand-name="item.brandName"
-          :btn-url="item.btnUrl"
-        />
-      </el-col>
-    </el-row>
-  </div> -->
-
-  <div class="main-container" style="margin-top: 15px; padding-bottom: 1000px">
+  <div class="main-container" style="margin-top: 15px">
     <Splide
       :options="{
         rewind: true,
@@ -283,6 +269,25 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       </SplideSlide>
     </Splide>
   </div>
+
+  <div
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #686863;
+      margin: 60px 0;
+      width: 100%;
+      height: 120px;
+      margin-bottom: 1000px;
+    "
+  >
+    <BenefitItem :Icon="FastDeliveryIcon" text="FAST AND FREE DELIVERY" />
+    <el-divider direction="vertical" />
+    <BenefitItem :Icon="GemstoneIcon" text="GEM AUTHENCITY GUARANTEED" />
+    <el-divider direction="vertical" />
+    <BenefitItem :Icon="ProtectedIcon" text="GEM LABORATORY CERTIFICATION" />
+  </div>
 </template>
 
 <style scoped>
@@ -298,6 +303,10 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   &:hover {
     animation: navItemColorChange 0.6s forwards;
   }
+}
+
+.el-divider--vertical {
+  height: 52px;
 }
 
 .heading {
