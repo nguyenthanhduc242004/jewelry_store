@@ -1,60 +1,47 @@
 <script setup lang="ts">
 import CarouselItem from "@/components/CarouselItem.vue";
-// @ts-ignore: no type declaration for .vue modules
 import BrandItem from "@/components/BrandItem.vue";
+import ProductItem from "@/components/ProductItem.vue";
 import HeartIcon from "@/components/icon/HeartIcon.vue";
 import { Goods, Search, User } from "@element-plus/icons-vue";
 import type { TabsPaneContext } from "element-plus";
 import { ref } from "vue";
 
-import bracelet1 from "@/assets/carousel-imgs/bracelet-1.jpg";
-import bracelet from "@/assets/carousel-imgs/bracelet.jpg";
-import earrings1 from "@/assets/carousel-imgs/earrings-1.jpg";
-import earrings from "@/assets/carousel-imgs/earrings.jpg";
-import necklace1 from "@/assets/carousel-imgs/necklace-1.jpg";
-import necklace from "@/assets/carousel-imgs/necklace.jpg";
-import ring1 from "@/assets/carousel-imgs/ring-1.jpg";
-import ring from "@/assets/carousel-imgs/ring.jpg";
-
-import brand1 from "@/assets/brand_logos/brand1.jpg";
-import brand2 from "@/assets/brand_logos/brand2.jpg";
-import brand3 from "@/assets/brand_logos/brand3.jpg";
-import brand4 from "@/assets/brand_logos/brand4.jpg";
-import brand5 from "@/assets/brand_logos/brand5.jpg";
-import brand6 from "@/assets/brand_logos/brand6.jpg";
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import "@splidejs/vue-splide/css";
 
 const carouselItemPropsList = [
   {
-    leftImageUrl: necklace,
+    leftImageUrl: "/src/assets/carousel-imgs/necklace.jpg",
     heading: "NECKLACES",
     subheading: "GRACE REFINED",
-    rightImageUrl: necklace1,
+    rightImageUrl: "/src/assets/carousel-imgs/necklace-1.jpg",
     message:
       "Elevate every look with our exquisite necklaces. From pendants to chokers, these designs add sophistication to any style.",
     btnText: "SHOP NECLACES",
   },
   {
-    leftImageUrl: ring,
+    leftImageUrl: "/src/assets/carousel-imgs/ring.jpg",
     heading: "RINGS",
     subheading: "A CIRCLE OF PERFECTION",
-    rightImageUrl: ring1,
+    rightImageUrl: "/src/assets/carousel-imgs/ring-1.jpg",
     message: "Celebrate every milestone with a ring that tells your story.",
     btnText: "SHOP RINGS",
   },
   {
-    leftImageUrl: earrings,
+    leftImageUrl: "/src/assets/carousel-imgs/earrings.jpg",
     heading: "EARRINGS",
     subheading: "ELEGANCE IN EVERY DETAIL",
-    rightImageUrl: earrings1,
+    rightImageUrl: "/src/assets/carousel-imgs/earrings-1.jpg",
     message:
       "From everyday essentials to show-stopping chandeliers, our earrings are designed to captivate and complement every moment.",
     btnText: "SHOP EARRINGS",
   },
   {
-    leftImageUrl: bracelet,
+    leftImageUrl: "/src/assets/carousel-imgs/bracelet.jpg",
     heading: "BRACELETS",
     subheading: "STYLE ON YOUR SLEEVE",
-    rightImageUrl: bracelet1,
+    rightImageUrl: "/src/assets/carousel-imgs/bracelet-1.jpg",
     message:
       "Add the perfect finishing touch with our bracelets. From classic bangles to modern cuffs, each piece is a work of art.",
     btnText: "SHOP BRACELETS",
@@ -63,34 +50,85 @@ const carouselItemPropsList = [
 
 const brandItemPropsList = [
   {
-    brandImageUrl: brand1,
+    brandImageUrl: "/src/assets/brand_logos/brand1.jpg",
     brandName: "SILVORA",
     btnUrl: "",
   },
   {
-    brandImageUrl: brand2,
+    brandImageUrl: "/src/assets/brand_logos/brand2.jpg",
     brandName: "LUMERA",
     btnUrl: "",
   },
   {
-    brandImageUrl: brand3,
+    brandImageUrl: "/src/assets/brand_logos/brand3.jpg",
     brandName: "NILA",
     btnUrl: "",
   },
   {
-    brandImageUrl: brand4,
+    brandImageUrl: "/src/assets/brand_logos/brand4.jpg",
     brandName: "MUSE",
     btnUrl: "",
   },
   {
-    brandImageUrl: brand5,
+    brandImageUrl: "/src/assets/brand_logos/brand5.jpg",
     brandName: "INGOUDE",
     btnUrl: "",
   },
   {
-    brandImageUrl: brand6,
+    brandImageUrl: "/src/assets/brand_logos/brand6.jpg",
     brandName: "VERRA",
     btnUrl: "",
+  },
+];
+
+const newProductsPropsList = [
+  {
+    productImageUrl: "/src/assets/product-imgs/product1/1.png",
+    brandName: "SILVORA",
+    productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
+    price: 11555000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product2/1.png",
+    brandName: "SILVORA",
+    productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
+    price: 11949000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product3/1.png",
+    brandName: "SILVORA",
+    productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
+    price: 12242000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product4/1.png",
+    brandName: "SILVORA",
+    productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
+    price: 12539000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product5/1.png",
+    brandName: "INGOUDE",
+    productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
+    price: 19957000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product6/1.png",
+    brandName: "INGOUDE",
+    productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
+    price: 17338000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product7/1.png",
+    brandName: "INGOUDE",
+    productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
+    price: 20951000,
+  },
+  {
+    productImageUrl: "/src/assets/product-imgs/product8/1.png",
+    brandName: "INGOUDE",
+    productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
+    price: 17557000,
   },
 ];
 
@@ -182,16 +220,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </el-carousel-item>
   </el-carousel>
 
-  <h1
-    style="
-      text-align: center;
-      margin-top: 40px;
-      font-size: 40px;
-      letter-spacing: 4px;
-    "
-  >
-    BRANDS
-  </h1>
+  <h1 class="heading">BRANDS</h1>
 
   <div class="main-container" style="padding: 5px 0">
     <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
@@ -208,6 +237,52 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       </el-col>
     </el-row>
   </div>
+
+  <h1 class="heading">NEW PRODUCTS</h1>
+
+  <!-- <div class="main-container" style="padding: 5px 0">
+    <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
+      <el-col
+        :span="6"
+        v-for="item in brandItemPropsList"
+        :key="item.brandName"
+      >
+        <BrandItem
+          :brand-image-url="item.brandImageUrl"
+          :brand-name="item.brandName"
+          :btn-url="item.btnUrl"
+        />
+      </el-col>
+    </el-row>
+  </div> -->
+
+  <div class="main-container" style="margin-top: 15px; padding-bottom: 1000px">
+    <Splide
+      :options="{
+        rewind: true,
+        perPage: 4,
+        perMove: 1,
+        gap: '1rem',
+        breakpoints: {
+          1000: {
+            perPage: 1,
+          },
+        },
+        autoplay: true,
+        interval: 3000,
+      }"
+      aria-label="Splide"
+    >
+      <SplideSlide v-for="item in newProductsPropsList">
+        <ProductItem
+          :productImageUrl="item.productImageUrl"
+          :brandName="item.brandName"
+          :productName="item.productName"
+          :price="item.price"
+        />
+      </SplideSlide>
+    </Splide>
+  </div>
 </template>
 
 <style scoped>
@@ -223,6 +298,13 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   &:hover {
     animation: navItemColorChange 0.6s forwards;
   }
+}
+
+.heading {
+  text-align: center;
+  margin-top: 60px;
+  font-size: 40px;
+  letter-spacing: 4px;
 }
 
 @keyframes navItemColorChange {

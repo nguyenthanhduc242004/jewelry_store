@@ -14,7 +14,7 @@ const props = defineProps([
     <div style="width: 50%; position: relative">
       <img
         style="width: 100%; height: 100%; object-fit: cover"
-        :src="`${props.leftImageUrl}`"
+        :src="props.leftImageUrl"
       />
       <div
         style="

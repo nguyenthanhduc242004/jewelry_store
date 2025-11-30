@@ -25,7 +25,9 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
+    Heading: typeof import('./src/components/Heading.vue')['default']
     HeartIcon: typeof import('./src/components/icon/HeartIcon.vue')['default']
+    ProductItem: typeof import('./src/components/ProductItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

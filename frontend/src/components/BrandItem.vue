@@ -48,6 +48,7 @@ const props = defineProps(["brandImageUrl", "brandName", "btnUrl"]);
 
 <style scoped>
 .wrapper {
+  border-radius: 2px;
   &:hover {
     .buy-now,
     .icon {
