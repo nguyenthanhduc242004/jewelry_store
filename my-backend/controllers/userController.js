@@ -6,7 +6,9 @@ const sendEmail = require("../utils/sendEmail");
 const {
     createUser,
     findUserByEmail,
-    activateUser
+    findUserByUsername,
+    activateUser,
+    updateUserPasswordByUsername
 } = require("../models/userModel");
 
 // REGISTER
@@ -27,7 +29,6 @@ exports.register = async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: "24h" }
         );
-        console.log("🔑 Token tạo ra:", token);
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         const activationLink = `http://localhost:3000/api/auth/activate/${token}`;
@@ -49,12 +50,8 @@ exports.register = async (req, res) => {
 exports.activateAccount = async (req, res) => {
     try {
         const token = decodeURIComponent(req.params.token);
-
-        console.log("📥 Token nhận:", token);
-
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        console.log("📤 Payload:", decoded);
         const [user] = await findUserByEmail(decoded.email);
         if (user.length === 0)
             return res.json(resultWrapper(false, 400, "Token không hợp lệ"));
@@ -63,7 +60,6 @@ exports.activateAccount = async (req, res) => {
 
         res.json(resultWrapper(true, 200, "Kích hoạt tài khoản thành công"));
     } catch (err) {
-        console.error("❌ Lỗi verify:", err);
         res.json(resultWrapper(false, 400, "Token hết hạn hoặc không hợp lệ"));
     }
 };
@@ -95,5 +91,61 @@ exports.login = async (req, res) => {
         res.json(resultWrapper(true, 200, "Đăng nhập thành công", { token }));
     } catch (err) {
         res.json(resultWrapper(false, 500, "Lỗi server"));
+    }
+};
+
+// FORGOT PASSWORD
+exports.forgotPassword = async (req, res) => {
+    try {
+        const { username } = req.body;
+        const [rows] = await findUserByUsername(username);
+        if (rows.length === 0)
+            return res.json(resultWrapper(false, 404, "User không tồn tại"));
+
+        const user = rows[0];
+        const email = user.email;
+
+        const token = jwt.sign(
+            { username: username },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        const resetLink = `http://localhost:3000/reset-password/${token}`;
+        // console.log("Reset Link:", resetLink);
+
+        await sendEmail(
+            email,
+            "Reset Password",
+            `Nhấn vào link để đổi mật khẩu: ${resetLink}`
+        );
+
+        res.json(resultWrapper(true, 200, "Email reset password đã được gửi"));
+    } catch (err) {
+        console.error(err);
+        res.json(resultWrapper(false, 500, "Lỗi server"));
+    }
+};
+
+// RESET PASSWORD
+exports.resetPassword = async (req, res) => {
+    try {
+        const { token } = req.params;
+        const { newPassword } = req.body;
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const username = decoded.username;
+
+        const [rows] = await findUserByUsername(username);
+        if (rows.length === 0)
+            return res.json(resultWrapper(false, 404, "User không tồn tại"));
+
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        await updateUserPasswordByUsername(username, hashedPassword);
+        res.json(resultWrapper(true, 200, "Đổi mật khẩu thành công"));
+    } catch (err) {
+        // console.error(err);
+        res.json(resultWrapper(false, 400, "Token hết hạn hoặc không hợp lệ"));
     }
 };

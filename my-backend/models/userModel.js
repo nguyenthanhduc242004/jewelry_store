@@ -11,6 +11,17 @@ exports.findUserByEmail = (email) => {
     return db.query("SELECT * FROM users WHERE email = ?", [email]);
 };
 
+exports.findUserByUsername = (username) => {
+    return db.query("SELECT * FROM users WHERE username = ?", [username]);
+};
+
 exports.activateUser = (email) => {
     return db.query("UPDATE users SET is_active = 1 WHERE email = ?", [email]);
+};
+
+exports.updateUserPasswordByUsername = (username, newPassword) => {
+    return db.query(
+        "UPDATE users SET password = ? WHERE username = ?",
+        [newPassword, username]
+    );
 };
