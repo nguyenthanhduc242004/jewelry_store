@@ -1,5 +1,5 @@
 <script setup>
-import HeartIcon from "@/components/icon/HeartIcon.vue";
+import HeartIcon from "../icons/HeartIcon.vue";
 import { formatNumberWithDots } from "@/helpers/formatNumberWithDots";
 
 const props = defineProps([
@@ -36,7 +36,9 @@ const props = defineProps([
       >
         {{ props.brandName }}
       </h3>
-      <p class="product-name">{{ props.productName }}</p>
+      <p class="two-line-ellipsis" style="margin: 5px 0">
+        {{ props.productName }}
+      </p>
       <span
         style="
           display: block;
@@ -52,6 +54,7 @@ const props = defineProps([
 
 <style scoped>
 .wrapper {
+  position: relative;
   text-align: center;
   background-color: #fff;
   margin-bottom: 15px;
@@ -61,19 +64,5 @@ const props = defineProps([
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   }
-}
-
-.product-name {
-  --line-height: 18px;
-  margin: 5px 0;
-  font-size: 16px;
-  height: calc(var(--line-height) * 2);
-  line-height: var(--line-height);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 </style>

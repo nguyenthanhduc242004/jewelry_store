@@ -1,5 +1,19 @@
 @import "./base.css";
 
+:root {
+  --primary-color: #d1913c;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
 #app {
   font-weight: normal;
   font-family: "Josefin Sans";
@@ -9,4 +23,42 @@
   align-items: center;
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.two-line-ellipsis {
+  --line-height: 18px;
+  font-size: 16px;
+  height: calc(var(--line-height) * 2);
+  line-height: var(--line-height);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.one-line-ellipsis {
+  font-size: 16px;
+  height: calc(var(--line-height) * 1);
+  line-height: var(--line-height);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.three-line-ellipsis {
+  --line-height: 18px;
+  font-size: 16px;
+  height: calc(var(--line-height) * 3);
+  line-height: var(--line-height);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

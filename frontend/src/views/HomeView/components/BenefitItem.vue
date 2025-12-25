@@ -1,6 +1,4 @@
 <script setup>
-import FastDeliveryIcon from "./icon/FastDeliveryIcon.vue";
-
 const props = defineProps(["Icon", "text"]);
 </script>
 

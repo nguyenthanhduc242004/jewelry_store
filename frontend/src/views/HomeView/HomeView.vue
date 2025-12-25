@@ -1,18 +1,22 @@
 <script setup lang="ts">
-import CarouselItem from "@/components/CarouselItem.vue";
-import BrandItem from "@/components/BrandItem.vue";
-import ProductItem from "@/components/ProductItem.vue";
-import HeartIcon from "@/components/icon/HeartIcon.vue";
 import { Goods, Search, User } from "@element-plus/icons-vue";
-import type { TabsPaneContext } from "element-plus";
-import { ref } from "vue";
-
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/vue-splide/css";
-import FastDeliveryIcon from "@/components/icon/FastDeliveryIcon.vue";
-import GemstoneIcon from "@/components/icon/GemstoneIcon.vue";
-import ProtectedIcon from "@/components/icon/ProtectedIcon.vue";
-import BenefitItem from "@/components/BenefitItem.vue";
+import type { TabsPaneContext } from "element-plus";
+
+import BenefitItem from "./components/BenefitItem.vue";
+import BrandItem from "./components/BrandItem.vue";
+import CarouselItem from "./components/CarouselItem.vue";
+import BlogItem from "./components/BlogItem.vue";
+import ProductItem from "./components/ProductItem.vue";
+
+import HeartIcon from "./icons/HeartIcon.vue";
+import FastDeliveryIcon from "./icons/FastDeliveryIcon.vue";
+import GemstoneIcon from "./icons/GemstoneIcon.vue";
+import ProtectedIcon from "./icons/ProtectedIcon.vue";
+
+import { ref } from "vue";
+import Footer from "@/components/Footer.vue";
 
 const carouselItemPropsList = [
   {
@@ -136,6 +140,37 @@ const newProductsPropsList = [
   },
 ];
 
+const blogItem = [
+  {
+    id: 1,
+    link: "/blog/1",
+    imageUrl: "/src/assets/blog-imgs/blog-1.jpg",
+    date: "2024-11-15",
+    title: "The Ultimate Guide to Choosing Your Perfect Engagement Ring",
+    description:
+      "Selecting an engagement ring is one of the most significant purchases you'll ever make, symbolizing your commitment and love for a lifetime. In this comprehensive guide, we walk you through everything you need to know about choosing the perfect ring that captures your partner's unique style and personality. From understanding the four Cs of diamonds—cut, clarity, color, and carat—to exploring alternative gemstones like sapphires, emeralds, and morganite, we cover all the essential factors that influence your decision. Learn about different ring settings, from classic solitaires to vintage-inspired halos, and discover how metal choices like platinum, white gold, and rose gold can dramatically affect the overall aesthetic. We'll also share insider tips on determining ring size discreetly, setting a realistic budget, and working with jewelers to create custom designs. Whether you're planning a surprise proposal or shopping together, this guide ensures you'll find a ring that perfectly represents your love story.",
+  },
+  {
+    id: 2,
+    link: "/blog/2",
+    imageUrl: "/src/assets/blog-imgs/blog-2.jpg",
+    date: "2024-09-22",
+    title:
+      "Jewelry Care 101: Keeping Your Precious Pieces Sparkling for Generations",
+    description:
+      "Your jewelry collection represents cherished memories, significant investments, and timeless beauty that deserves proper care and maintenance. In this essential guide, we reveal professional secrets for preserving the brilliance and longevity of your most treasured pieces. Discover the best cleaning methods for different types of jewelry, from delicate pearls that require gentle handling to durable diamonds that can withstand more rigorous cleaning. Learn which household products are safe to use and which can cause irreversible damage to your precious metals and gemstones. We'll explain the importance of regular professional inspections, proper storage techniques to prevent scratching and tarnishing, and when to remove your jewelry to avoid unnecessary wear. Find out how environmental factors like humidity, chemicals in lotions and perfumes, and even chlorine in swimming pools can affect your pieces. We also cover insurance considerations, documentation best practices, and how to identify when your jewelry needs professional repair or restoration to maintain its value and beauty for future generations.",
+  },
+  {
+    id: 3,
+    link: "/blog/3",
+    imageUrl: "/src/assets/blog-imgs/blog-3.jpg",
+    date: "2024-07-08",
+    title: "Trending Now: 2024's Hottest Jewelry Styles and How to Wear Them",
+    description:
+      "The world of fine jewelry is experiencing an exciting renaissance, blending timeless elegance with contemporary innovation and bold self-expression. In this trend report, we explore the most coveted jewelry styles dominating 2024, from chunky chain necklaces and stackable rings to asymmetrical earrings and personalized nameplate pieces. Discover how sustainable and ethically sourced jewelry has moved from niche to mainstream, with lab-grown diamonds and recycled metals becoming the choice of conscious consumers. We'll show you how to master the art of layering necklaces of varying lengths, mixing metals for an effortlessly chic look, and incorporating vintage and heirloom pieces into modern ensembles. Learn about the resurgence of colored gemstones, particularly vibrant emeralds and sapphires, and how celebrities and influencers are styling statement pieces for both everyday wear and special occasions. Whether you prefer minimalist designs or maximalist glamour, this guide provides styling inspiration and practical tips for incorporating these trends into your personal jewelry wardrobe while maintaining your unique aesthetic and ensuring versatility across seasons.",
+  },
+];
+
 const input = ref();
 const activeTab = ref();
 
@@ -241,7 +276,10 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </el-row>
   </div>
 
-  <h1 class="heading">NEW PRODUCTS</h1>
+  <div class="main-container" style="position: relative">
+    <h1 class="heading">NEW PRODUCTS</h1>
+    <button class="view-all-btn">View All</button>
+  </div>
   <div class="main-container" style="margin-top: 15px">
     <Splide
       :options="{
@@ -270,16 +308,16 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </Splide>
   </div>
 
+  <!-- BENEFITS BARS -->
   <div
     style="
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #686863;
-      margin: 60px 0;
+      margin: 48px 0 60px;
       width: 100%;
       height: 120px;
-      margin-bottom: 1000px;
     "
   >
     <BenefitItem :Icon="FastDeliveryIcon" text="FAST AND FREE DELIVERY" />
@@ -288,6 +326,84 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     <el-divider direction="vertical" />
     <BenefitItem :Icon="ProtectedIcon" text="GEM LABORATORY CERTIFICATION" />
   </div>
+
+  <div class="main-container" style="position: relative">
+    <h1 class="heading">BEST SELLERS</h1>
+    <button class="view-all-btn">View All</button>
+  </div>
+  <div class="main-container" style="padding: 5px 0; margin-top: 15px">
+    <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
+      <el-col
+        :span="6"
+        v-for="item in newProductsPropsList"
+        :key="item.brandName"
+      >
+        <ProductItem
+          :productImageUrl="item.productImageUrl"
+          :brandName="item.brandName"
+          :productName="item.productName"
+          :price="item.price"
+        />
+      </el-col>
+    </el-row>
+  </div>
+
+  <!-- NEW BLOG -->
+  <div class="main-container" style="position: relative">
+    <h1 class="heading">NEW BLOGS</h1>
+    <button class="view-all-btn">View All</button>
+  </div>
+  <div
+    class="main-container"
+    style="padding: 5px 0; margin-top: 15px; margin-bottom: 80px"
+  >
+    <el-row :gutter="28" style="margin-left: 5px; margin-right: 5px">
+      <el-col :span="8" v-for="item in blogItem" :key="item.id">
+        <BlogItem
+          :imageUrl="item.imageUrl"
+          :date="item.date"
+          :title="item.title"
+          :description="item.description"
+          :link="item.link"
+        />
+      </el-col>
+    </el-row>
+  </div>
+
+  <!-- ABOUT US -->
+  <div class="main-container" style="position: relative; margin-bottom: 40px">
+    <img
+      src="/public/about-us.jpg"
+      alt="about-us"
+      style="width: 100%; height: 480px; object-fit: cover"
+    />
+    <div
+      style="
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      "
+    >
+      <h1
+        class="heading"
+        style="
+          text-shadow: 2px 2px 4px #333;
+          color: #fff;
+          font-size: 60px;
+          margin-top: 0;
+        "
+      >
+        ABOUT US
+      </h1>
+      <button class="read-more-btn">READ MORE</button>
+    </div>
+  </div>
+
+  <Footer />
 </template>
 
 <style scoped>
@@ -323,5 +439,69 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   to {
     color: #ffc108;
   }
+}
+
+.read-more-btn {
+  font-size: 16px;
+  letter-spacing: 1px;
+  position: relative;
+  background-color: #fff;
+  color: #252a2b;
+  font-family: "Josefin Sans", sans-serif;
+  padding: 16px 40px;
+  border: 1px solid #fff;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+
+  transition: color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    background-color 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+  /* Create the sliding background */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: -1;
+    transform: translateX(-100%);
+    transition: transform 0.45s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  &:hover {
+    color: #fff;
+    border-color: #fff;
+    background-color: transparent;
+  }
+
+  &:hover::before {
+    transform: translateX(0);
+  }
+}
+
+.view-all-btn {
+  font-size: 16px;
+  position: absolute;
+  right: 0;
+  top: 22px;
+  margin-right: 20px;
+  transition: color 0.2s;
+  cursor: pointer;
+  color: #333;
+  font-size: 16px;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
+</style>
+
+<style lang="css">
+.splide__pagination {
+  position: relative;
+  top: 0px;
 }
 </style>
