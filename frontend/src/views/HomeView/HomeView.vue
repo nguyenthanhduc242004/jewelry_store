@@ -1,22 +1,20 @@
 <script setup lang="ts">
-import { Goods, Search, User } from "@element-plus/icons-vue";
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/vue-splide/css";
 import type { TabsPaneContext } from "element-plus";
 
+import ProductCard from "@/components/ProductCard.vue";
 import BenefitItem from "./components/BenefitItem.vue";
+import BlogItem from "./components/BlogItem.vue";
 import BrandItem from "./components/BrandItem.vue";
 import CarouselItem from "./components/CarouselItem.vue";
-import BlogItem from "./components/BlogItem.vue";
-import ProductItem from "./components/ProductItem.vue";
 
-import HeartIcon from "./icons/HeartIcon.vue";
 import FastDeliveryIcon from "./icons/FastDeliveryIcon.vue";
 import GemstoneIcon from "./icons/GemstoneIcon.vue";
 import ProtectedIcon from "./icons/ProtectedIcon.vue";
 
+import Heading from "@/components/Heading.vue";
 import { ref } from "vue";
-import Footer from "@/components/Footer.vue";
 
 const carouselItemPropsList = [
   {
@@ -91,49 +89,49 @@ const brandItemPropsList = [
 
 const newProductsPropsList = [
   {
-    productImageUrl: "/src/assets/product-imgs/product1/1.png",
+    imageUrl: "/src/assets/product-imgs/product1/1.png",
     brandName: "SILVORA",
     productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
     price: 11555000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product2/1.png",
+    imageUrl: "/src/assets/product-imgs/product2/1.png",
     brandName: "SILVORA",
     productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
     price: 11949000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product3/1.png",
+    imageUrl: "/src/assets/product-imgs/product3/1.png",
     brandName: "SILVORA",
     productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
     price: 12242000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product4/1.png",
+    imageUrl: "/src/assets/product-imgs/product4/1.png",
     brandName: "SILVORA",
     productName: "Nhẫn cầu hôn Vàng 14K đá Moissanite",
     price: 12539000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product5/1.png",
+    imageUrl: "/src/assets/product-imgs/product5/1.png",
     brandName: "INGOUDE",
     productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
     price: 19957000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product6/1.png",
+    imageUrl: "/src/assets/product-imgs/product6/1.png",
     brandName: "INGOUDE",
     productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
     price: 17338000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product7/1.png",
+    imageUrl: "/src/assets/product-imgs/product7/1.png",
     brandName: "INGOUDE",
     productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
     price: 20951000,
   },
   {
-    productImageUrl: "/src/assets/product-imgs/product8/1.png",
+    imageUrl: "/src/assets/product-imgs/product8/1.png",
     brandName: "INGOUDE",
     productName: "Nhẫn cưới Vàng 14K Kim cương Lab-grown",
     price: 17557000,
@@ -171,7 +169,6 @@ const blogItem = [
   },
 ];
 
-const input = ref();
 const activeTab = ref();
 
 const handleClick = (tab: TabsPaneContext, event: Event) => {
@@ -180,44 +177,6 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 </script>
 
 <template>
-  <header
-    style="
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      width: 100%;
-      background-color: #333;
-      padding: 0 32px;
-      z-index: 1000;
-    "
-  >
-    <div style="display: flex; align-items: center" class="main-container">
-      <el-input
-        v-model="input"
-        placeholder="What are you looking for?"
-        style="width: auto; height: 40px"
-      >
-        <template #prefix>
-          <el-icon><Search /></el-icon>
-        </template>
-      </el-input>
-      <div style="flex-grow: 1; display: flex">
-        <img
-          style="width: 80px; height: 60px; margin: auto; object-fit: contain"
-          src="@/assets/logo.png"
-        />
-      </div>
-      <div>
-        <el-button :icon="User" circle />
-        <el-button :icon="HeartIcon" circle />
-        <el-badge :value="12" style="margin-left: 10px">
-          <el-button :icon="Goods" circle />
-        </el-badge>
-      </div>
-    </div>
-  </header>
-
   <!-- <nav style="margin-top: 60px; background-color: #333">
     <ul style="list-style: none; display: flex; justify-content: center">
       <li>
@@ -246,7 +205,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </ul>
   </nav> -->
 
-  <el-carousel height="calc(100vh - 60px)" style="margin-top: 60px">
+  <el-carousel height="calc(100vh - 60px)">
     <el-carousel-item v-for="item in carouselItemPropsList" :key="item.heading">
       <CarouselItem
         :left-image-url="item.leftImageUrl"
@@ -259,7 +218,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </el-carousel-item>
   </el-carousel>
 
-  <h1 class="heading">BRANDS</h1>
+  <Heading class="heading" heading="BRANDS" />
   <div class="main-container" style="padding: 5px 0">
     <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
       <el-col
@@ -276,10 +235,12 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     </el-row>
   </div>
 
-  <div class="main-container" style="position: relative">
-    <h1 class="heading">NEW PRODUCTS</h1>
-    <button class="view-all-btn">View All</button>
-  </div>
+  <Heading
+    class="heading"
+    heading="NEW PRODUCTS"
+    hasViewAllBtn
+    url="/products"
+  />
   <div class="main-container" style="margin-top: 15px">
     <Splide
       :options="{
@@ -298,8 +259,8 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       aria-label="Splide"
     >
       <SplideSlide v-for="item in newProductsPropsList">
-        <ProductItem
-          :productImageUrl="item.productImageUrl"
+        <ProductCard
+          :imageUrl="item.imageUrl"
           :brandName="item.brandName"
           :productName="item.productName"
           :price="item.price"
@@ -327,10 +288,12 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     <BenefitItem :Icon="ProtectedIcon" text="GEM LABORATORY CERTIFICATION" />
   </div>
 
-  <div class="main-container" style="position: relative">
-    <h1 class="heading">BEST SELLERS</h1>
-    <button class="view-all-btn">View All</button>
-  </div>
+  <Heading
+    class="heading"
+    heading="BEST SELLERS"
+    hasViewAllBtn
+    url="/products"
+  />
   <div class="main-container" style="padding: 5px 0; margin-top: 15px">
     <el-row :gutter="10" style="margin-left: 5px; margin-right: 5px">
       <el-col
@@ -338,8 +301,8 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
         v-for="item in newProductsPropsList"
         :key="item.brandName"
       >
-        <ProductItem
-          :productImageUrl="item.productImageUrl"
+        <ProductCard
+          :imageUrl="item.imageUrl"
           :brandName="item.brandName"
           :productName="item.productName"
           :price="item.price"
@@ -349,10 +312,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   </div>
 
   <!-- NEW BLOG -->
-  <div class="main-container" style="position: relative">
-    <h1 class="heading">NEW BLOGS</h1>
-    <button class="view-all-btn">View All</button>
-  </div>
+  <Heading class="heading" heading="NEW BLOGS" hasViewAllBtn url="/blog" />
   <div
     class="main-container"
     style="padding: 5px 0; margin-top: 15px; margin-bottom: 80px"
@@ -371,9 +331,9 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
   </div>
 
   <!-- ABOUT US -->
-  <div class="main-container" style="position: relative; margin-bottom: 40px">
+  <div class="main-container" style="position: relative; margin-bottom: 60px">
     <img
-      src="/public/about-us.jpg"
+      src="/about-us.jpg"
       alt="about-us"
       style="width: 100%; height: 480px; object-fit: cover"
     />
@@ -402,11 +362,13 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
       <button class="read-more-btn">READ MORE</button>
     </div>
   </div>
-
-  <Footer />
 </template>
 
 <style scoped>
+.heading {
+  margin-top: 60px;
+}
+
 .nav-item {
   display: block;
   height: 40px;
@@ -423,13 +385,6 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 
 .el-divider--vertical {
   height: 52px;
-}
-
-.heading {
-  text-align: center;
-  margin-top: 60px;
-  font-size: 40px;
-  letter-spacing: 4px;
 }
 
 @keyframes navItemColorChange {
@@ -479,22 +434,6 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
 
   &:hover::before {
     transform: translateX(0);
-  }
-}
-
-.view-all-btn {
-  font-size: 16px;
-  position: absolute;
-  right: 0;
-  top: 22px;
-  margin-right: 20px;
-  transition: color 0.2s;
-  cursor: pointer;
-  color: #333;
-  font-size: 16px;
-
-  &:hover {
-    color: var(--primary-color);
   }
 }
 </style>

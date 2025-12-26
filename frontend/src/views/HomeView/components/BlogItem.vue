@@ -1,5 +1,6 @@
 <script setup>
 import { RouterLink } from "vue-router";
+import { formatDateWithDay } from "@/utils/dateFormatter";
 
 const props = defineProps(["imageUrl", "date", "title", "description", "link"]);
 </script>
@@ -13,12 +14,12 @@ const props = defineProps(["imageUrl", "date", "title", "description", "link"]);
       />
     </router-link>
     <span style="font-size: 14px; padding: 12px 4px; color: #666">
-      {{ props.date }}
+      {{ formatDateWithDay(props.date) }}
     </span>
     <router-link class="blog-heading two-line-ellipsis" :to="props.link">
       {{ props.title }}
     </router-link>
-    <el-divider style="margin: 20px 0" />
+    <el-divider style="margin: 20px 0; border-color: #666" />
     <p class="three-line-ellipsis">{{ props.description }}</p>
   </div>
 </template>
