@@ -1,0 +1,26 @@
+._container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04);
+    color: #213547;
+}
+
+._noPadding {
+    padding: 0;
+}
+
+._header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+._title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    color: #0f6fbd;
+}

@@ -1,0 +1,57 @@
+# ---- OS / Editor ----
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.vscode/
+.idea/
+
+# ---- Visual Studio ----
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+
+# ---- Build output ----
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Ll]ogs/
+TestResults/
+
+# ---- Packages / NuGet ----
+packages/
+*.nupkg
+*.snupkg
+*.nuspec
+.nuget/
+
+# ---- ASP.NET Core ----
+wwwroot/*
+!wwwroot/.keep
+
+# ---- Configuration / Secrets ----
+.env
+.env.local
+.env.*.local
+
+# User secrets are stored outside the repo by default
+
+# ---- Tooling ----
+/.terraform/
+node_modules/
+
+# ---- Others ----
+*.Cache
+*.bak
+*.tmp
+*.log
+*.pid
+*.seed

@@ -1,0 +1,10 @@
+.list-item {
+  font-size: 20px;
+  padding: 5px 0;
+  transition: color 0.3s;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--primary-color);
+  }
+}
